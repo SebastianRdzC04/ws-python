@@ -1,14 +1,27 @@
 import socketio
 from Repository.serial import Consultador
+from Sensors.sensor import Sensor
+from functions.message_parser import parse_serial_message, parse_serial_messages
 import threading
 import time
+from Repository.group_sensors import SensorsGroup
+
+WLB1 = Sensor(sensor_name="Sensor de Proximidad", identifier="WLB1", device_id="1", sensor_id="1")
+WLB2 = Sensor(sensor_name="Sensor de Temperatura", identifier="WLB2", device_id="2", sensor_id="2")
+WLB3 = Sensor(sensor_name="Sensor de Humedad", identifier="WLB3", device_id="3", sensor_id="3")
+
+sensors_group = SensorsGroup(sensors=[WLB1, WLB2, WLB3])
+
 
 def sensors_loop():
     while True:
         try:
             datos = Consultador.consultar_datos()
-            if datos:
-                print("Datos consultados:", datos)
+            parsed_messages = parse_serial_messages(datos)
+
+            if parsed_messages:
+                print("Datos consultados:", parsed_messages)
+                sensors_group.update_sensors(parsed_messages)
         except Exception as e:
             print(f"Error en el bucle de sensores: {e}")
         time.sleep(5)  # Espera 5 segundos antes de la siguiente consulta

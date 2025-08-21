@@ -1,4 +1,5 @@
 from Repository.mongo import Mongo
+from Repository.serial import Consultador
 
 
 
