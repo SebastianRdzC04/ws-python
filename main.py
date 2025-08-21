@@ -6,11 +6,23 @@ import threading
 import time
 from Repository.group_sensors import SensorsGroup
 
-WLB1 = Sensor(sensor_name="Sensor de Proximidad", identifier="WLB1", device_id="1", sensor_id="1")
-WLB2 = Sensor(sensor_name="Sensor de Temperatura", identifier="WLB2", device_id="2", sensor_id="2")
-WLB3 = Sensor(sensor_name="Sensor de Humedad", identifier="WLB3", device_id="3", sensor_id="3")
 
-sensors_group = SensorsGroup(sensors=[WLB1, WLB2, WLB3])
+# nivel de agua sensor de agua del bebedero
+WLV_001 = Sensor(sensor_name="Sensor de Proximidad", identifier="WLV_001", device_id="1", sensor_id="1")
+# sensor infrarrojo del bebedero 
+WIR_001 = Sensor(sensor_name="Sensor de Temperatura", identifier="WIR_001", device_id="2", sensor_id="2")
+
+MQ2_001 = Sensor(sensor_name="Sensor de Humedad", identifier="MQ2_001", device_id="3", sensor_id="3")
+## 
+DHT_001 = Sensor(sensor_name="Sensor de Luz", identifier="DHT_001", device_id="4", sensor_id="4")
+## ultrasonico del arenero
+LUT_001 = Sensor(sensor_name="Sensor de Movimiento", identifier="LUT_001", device_id="5", sensor_id="5")
+
+UTS_001 = Sensor(sensor_name="Sensor de Gas", identifier="UTS_001", device_id="6", sensor_id="6")
+UTS_002 = Sensor(sensor_name="Sensor de Gas2", identifier="UTS_002", device_id="6", sensor_id="7")
+WIT_001 = Sensor(sensor_name="Sensor de Inundación", identifier="WIT_001", device_id="7", sensor_id="8")
+
+sensors_group = SensorsGroup(sensors=[WLV_001, WIR_001, MQ2_001, DHT_001, LUT_001, UTS_001, UTS_002, WIT_001])
 
 
 def sensors_loop():
